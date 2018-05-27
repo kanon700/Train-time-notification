@@ -10,7 +10,6 @@ def getNearestValue(list, num):
 
 if __name__ == "__main__":
 
-
     url = "https://roote.ekispert.net/ja/timetable/25000/1350"
     date = datetime.datetime.now()
 
@@ -24,7 +23,6 @@ if __name__ == "__main__":
     test = test.split()
     test = [int(s) for s in test]
 
-\
     print(getNearestValue(test,30))
 
     # pattern=r'([0-9]*)'
