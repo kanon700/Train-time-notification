@@ -12,8 +12,41 @@ if __name__ == "__main__":
 
     url = "https://roote.ekispert.net/ja/timetable/25000/1350"
     date = datetime.datetime.now()
+    walktime= '00:15:00'
+    today=datetime.date.today()
 
-    # fetched_df = pandas.io.html.read_html(url,index_col=0)
+    # ttime = datetime.datetime.strptime(test, '%H:%M:%S')
+    # print(ttime)
+
+    fetched_df = pandas.io.html.read_html(url,index_col=0)
+    df=fetched_df[0]
+    list=[]
+
+    for index, row in df.iterrows():
+        test=df.at[index,1]
+        test = test.split()
+        for item in test:
+            item=re.sub(r'\D', '',item)
+            # print(str(index)+':'+str(item))
+            ttime=datetime.datetime.strptime(str(datetime.date.today())+' '+str(index)+':'+str(item)+':00', '%Y-%m-%d %H:%M:%S')
+            list.append(ttime)
+
+    # print(list)
+
+    # idx = np.abs((date - np.asarray(list)).argmin())
+    # print(np.asarray(list) - date)
+    # print(np.abs(date - list[90]).argmin)
+    # print(date - list[90])
+    # print(date)
+    # print(list[90])
+
+    for val in list:
+        if (date < val) :
+            print(val)
+            break
+
+
+    # 0が平日 1が土日祝
     # timetable =fetched_df[0]
     # test=df.at[5,1]
     # test = test.split()
@@ -24,9 +57,8 @@ if __name__ == "__main__":
     #print(df.index.values)
     #print(df.columns.values)
 
-    # pattern=r'([0-9]*)'
-    # lists=re.findall(pattern,fetched_df)
     # print(lists)
 
-
-    #fetched_df[0].to_csv('output.csv',index='false', encoding="utf-8")
+    # 0が平日 1が土日祝
+    # fetched_df[0].to_csv('output0.csv',index='false', encoding="utf-8")
+    # fetched_df[1].to_csv('output1.csv',index='false', encoding="utf-8")
