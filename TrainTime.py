@@ -13,17 +13,16 @@ if __name__ == "__main__":
     url = "https://roote.ekispert.net/ja/timetable/25000/1350"
     date = datetime.datetime.now()
 
-    fetched_df = pandas.io.html.read_html(url,index_col=0)
-    timetable =fetched_df[0]
+    # fetched_df = pandas.io.html.read_html(url,index_col=0)
+    # timetable =fetched_df[0]
+    # test=df.at[5,1]
+    # test = test.split()
+    # test = [int(s) for s in test]
+    # print(getNearestValue(test,30))
+
     #fetched_df = fetched_df.split(' ')
     #print(df.index.values)
     #print(df.columns.values)
-
-    test=df.at[5,1]
-    test = test.split()
-    test = [int(s) for s in test]
-
-    print(getNearestValue(test,30))
 
     # pattern=r'([0-9]*)'
     # lists=re.findall(pattern,fetched_df)
