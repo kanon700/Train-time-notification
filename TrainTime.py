@@ -4,7 +4,6 @@
 import pandas
 import re
 import datetime
-import subprocess
 
 def TrainTimeNotification():
     # 到着予定時刻は現在時間+walktimeの時間
