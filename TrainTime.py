@@ -4,13 +4,12 @@
 import pandas
 import re
 import datetime
-import subprocess
 
 def TrainTimeNotification():
     # 到着予定時刻は現在時間+walktimeの時間
     walktime=15
-    date = datetime.datetime.now()
-    date+=datetime.timedelta(minutes=walktime)
+    arrivaltime = datetime.datetime.now()
+    arrivaltime+=datetime.timedelta(minutes=walktime)
 
     # 駅すぱーとから時刻表を取得する
     url = "https://roote.ekispert.net/ja/timetable/25000/1350"
@@ -31,18 +30,20 @@ def TrainTimeNotification():
             list.append(ttime)
 
     # リストと到着予定時刻から最短で乗れる電車の時刻を取得
-    for index, val in enumerate(list):
-        if date < val :
+    for index, traintime in enumerate(list):
+        if arrivaltime < traintime :
+            # traintimeは「2018-05-27 23:06:00」の形式のため、splitで時分を切り出す
+            traintime = str(traintime).split()
+            traintime = str(traintime[1]).split(":")
             if index == 0 :
-                print("次は始発です")
+                notice = "次は始発で"+str(traintime[0])+"時"+str(traintime[1])+"分です"
             else:
-                # valは「2018-05-27 23:06:00」の形式のため、splitで時分を切り出す
-                val = str(val).split()
-                val = str(val[1]).split(":")
-                print("次に乗れる電車は"+str(val[0])+"時"+str(val[1])+"分です")
+                notice = "次に乗れる電車は"+str(traintime[0])+"時"+str(traintime[1])+"分です"
             break
     else:
-        print("終電にも間に合いません")
+        notice = "終電にも間に合いません"
+
+    return notice
 
 if __name__ == '__main__':
     TrainTimeNotification()
